@@ -1,10 +1,9 @@
 __author__ = 'billyevans'
 
-__all__ = ['parse_adjlist']
-
+from digraph import DiGraph, Edge
 
 def parse_adjlist(lines):
-    G=DiGraph()
+    G = DiGraph()
     for line in lines:
         if not len(line):
             continue
@@ -13,16 +12,15 @@ def parse_adjlist(lines):
         if len(vlist) != 3:
             raise TypeError("Wrong line with edge of DiGraph")
         v = vlist[0]
-        w =  vlist[1]
+        w = vlist[1]
         weight = vlist[2]
-        if weight < 0:
-            raise TypeError("Negative weight of route")
         G.add_edge(Edge(v, w, weight))
-        print(w, v, weight)
 
+    return G
 
-
-
-
-#def generate_adjlist(G):
-
+def generate_adjlist(G):
+    for s, nbrs in G.edges_iter():
+        for t, data in nbrs.items():
+            #line = '(' + str(s) + ' -> ' + str(t) + ') ' + str(data.weight)
+            line = str(s) + ' ' + str(t) + ' ' + str(data.weight)
+            yield line
