@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from digraphio import parse_adjlist
+from core.digraphio import parse_adjlist
 
 __author__ = 'billyevans'
 
@@ -15,7 +15,6 @@ class TestParseAdjlist(TestCase):
             "A OtherCity 666"
         ]
         G = parse_adjlist(text_graph)
-        print(G.edges())
         self.assertEqual(5, G.e())
         self.assertEqual(7, G.v())
         self.assertEqual(1, len(G.adj('1')))

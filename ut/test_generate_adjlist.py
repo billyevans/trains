@@ -2,8 +2,8 @@ from unittest import TestCase
 
 __author__ = 'billyevans'
 
-from digraphio import generate_adjlist
-from digraph import DiGraph, Edge
+from core.digraphio import generate_adjlist
+from core.digraph import DiGraph, Edge
 
 
 class TestGenerateAdjlist(TestCase):

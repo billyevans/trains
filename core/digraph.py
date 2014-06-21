@@ -2,14 +2,14 @@ __author__ = 'billyevans'
 
 from collections import defaultdict
 
+# Edge of DiGraph with positive weight
 class Edge(object):
-    def __init__(self, v, w, weight):
+    def __init__(self, v, w, distance):
         self.v = v
         self.w = w
-        self.weight = float(weight)
-        if self.weight < 0:
-            raise TypeError("Wrong value of weight")
-
+        self.d = float(distance)
+        if self.d < 0:
+            raise ValueError("Wrong value of distance")
 
     def source(self):
         return self.v
@@ -17,31 +17,38 @@ class Edge(object):
     def dest(self):
         return self.w
 
+    def distance(self):
+        return self.d
 
-# digraph with adj
+
+# digraph with Edge's in adjlist representation
 class DiGraph(object):
     def __init__(self):
         self.adjlist = defaultdict(lambda: defaultdict(Edge))
-        self.nodes = set()
+        self.nodeslist = set()
         self.ed = 0
 
     def add_edge(self, e):
         self.adjlist[e.source()][e.dest()] = e
-        self.nodes.add(e.dest())
-        self.nodes.add(e.source())
+        self.nodeslist.add(e.dest())
+        self.nodeslist.add(e.source())
         self.ed += 1
 
     def e(self):
         return self.ed
     # return number of vertices
     def v(self):
-        return len(self.nodes)
+        return len(self.nodeslist)
 
     # return edges pointing from v
     def adj(self, v):
-        if v not in self.nodes:
-            raise RuntimeError("There is no that node in the graph " + str(v))
+        self.has_node(v)
         return self.adjlist[v]
+
+    # check @v node and raise RuntimeError if there is no that node in the graph
+    def has_node(self, v):
+        if v not in self.nodeslist:
+            raise ValueError("There is no that node in the graph " + str(v))
 
     def edges(self):
         return self.adjlist.items()
@@ -49,12 +56,13 @@ class DiGraph(object):
     def edges_iter(self):
         return iter(self.adjlist.items())
 
+    def nodes(self):
+        return self.nodeslist
+
     # return -1 if there is no such path
     def dist(self, v, w):
-        if v not in self.nodes:
-            raise RuntimeError("There is no that node in the graph " + str(v))
-        if w not in self.nodes:
-            raise RuntimeError("There is no that node in the graph " + str(w))
+        self.has_node(v)
+        self.has_node(w)
         if self.adjlist[v].get(w) is None:
             return -1
-        return self.adjlist[v][w].weight
+        return self.adjlist[v][w].distance()
