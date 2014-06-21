@@ -5,6 +5,6 @@ __author__ = 'billyevans'
 from test_bfs import *
 from test_dijkstrasp import *
 from test_distance import *
-from test_generate_adjlist import *
-from test_parse_adjlist import *
+from test_generate_edgelist import *
+from test_parse_edgelist import *
 from test_request import *

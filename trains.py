@@ -5,7 +5,7 @@ __author__ = 'billyevans'
 
 import sys
 
-from core.digraphio import parse_adjlist
+from core.digraphio import parse_edgelist
 import request
 
 
@@ -20,7 +20,7 @@ if __name__ == '__main__':
         print("Usage: " + sys.argv[0] + " <graph> <requests> <result>")
         sys.exit(1)
     with open(sys.argv[1]) as gfile:
-        G = parse_adjlist(gfile.readlines())
+        G = parse_edgelist(gfile.readlines())
 
     with open(sys.argv[3], "w") as ofile:
         # process requests from file

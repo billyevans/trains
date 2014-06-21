@@ -79,8 +79,8 @@ class TestRequest(TestCase):
     def test_sp_wrong_arg_num2(self):
         self.assertRaises(ValueError, request.process, self.G, 'shortest_path(1)')
 
-    def test_sp_simple(self):
+    def test_sp_simple1(self):
         self.assertEqual(7, request.process(self.G, 'shortest_path(1 3)'))
 
-    def test_sp_simple(self):
+    def test_sp_simple2(self):
         self.assertEqual('NO SUCH ROUTE', request.process(self.G, 'shortest_path(3 1)'))

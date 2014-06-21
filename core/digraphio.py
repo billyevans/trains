@@ -2,7 +2,7 @@ __author__ = 'billyevans'
 
 from core.digraph import DiGraph, Edge
 
-def parse_adjlist(lines):
+def parse_edgelist(lines):
     G = DiGraph()
     for line in lines:
         if not len(line):
@@ -17,7 +17,7 @@ def parse_adjlist(lines):
 
     return G
 
-def generate_adjlist(G):
+def generate_edgelist(G):
     for s, nbrs in G.edges_iter():
         for t, data in nbrs.items():
             #line = '(' + str(s) + ' -> ' + str(t) + ') ' + str(data.weight)
